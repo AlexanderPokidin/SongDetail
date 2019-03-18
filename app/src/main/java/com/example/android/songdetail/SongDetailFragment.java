@@ -24,10 +24,8 @@ public class SongDetailFragment extends Fragment {
     }
 
     public static SongDetailFragment newInstance(int selectedSong) {
-
         SongDetailFragment fragment = new SongDetailFragment();
         Bundle args = new Bundle();
-
         args.putInt(SongUtils.SONG_ID_KEY, selectedSong);
         fragment.setArguments(args);
         return fragment;
@@ -44,7 +42,7 @@ public class SongDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_song_detail, container, false);
+        View rootView = inflater.inflate(R.layout.song_detail, container, false);
         // Show the detail information in a TextView.
         if (mSong != null) {
             ((TextView) rootView.findViewById(R.id.song_detail))
