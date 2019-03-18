@@ -23,17 +23,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.example.android.songdetail.content.SongUtils;
 
 /**
  * An activity representing a single song detail screen.
  */
-public class  SongDetailActivity extends AppCompatActivity {
+public class SongDetailActivity extends AppCompatActivity {
 
     // SongItem includes the song title and detail.
-    public SongUtils.Song mSong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +46,10 @@ public class  SongDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        // This activity displays the detail. In a real-world scenario,
-        // get the data from a content repository.
-        mSong = SongUtils.SONG_ITEMS.get
-                (getIntent().getIntExtra(SongUtils.SONG_ID_KEY, 0));
-        // Show the detail information in a TextView.
-        if (mSong != null) {
-            ((TextView) findViewById(R.id.song_detail))
-                    .setText(mSong.details);
+        if (savedInstanceState == null) {
+            int selectedSong = getIntent().getIntExtra(SongUtils.SONG_ID_KEY, 0);
+            SongDetailFragment fragment = SongDetailFragment.newInstance(selectedSong);
+            getSupportFragmentManager().beginTransaction().add(R.id.song_detail_container, fragment).commit();
         }
     }
 
